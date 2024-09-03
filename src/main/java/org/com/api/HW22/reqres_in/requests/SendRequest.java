@@ -23,4 +23,18 @@ return given()
         .statusCode(expectedStatusCode)
         .extract().response();
     }
+
+    public static Response sendGetRequest(RequestSpecification reqSpecification,
+                                                String endpoint,
+                                                int expectedStatusCode) {
+        return given()
+                .spec(reqSpecification)
+                .when()
+                .log().all()
+                .get(endpoint)
+                .then()
+                .log().all()
+                .statusCode(expectedStatusCode)
+                .extract().response();
+    }
 }

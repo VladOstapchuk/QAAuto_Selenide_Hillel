@@ -1,9 +1,13 @@
 package HomeWorks.api.HW21_reqres_in;
 
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.com.api.HW22.reqres_in.requests.SendRequest.sendGetRequest;
+import static org.com.api.HW22.reqres_in.requests.SendRequest.sendPostRequestLogin;
+import static org.com.api.HW22.reqres_in.specification.ReqSpecification.reqSpecification;
 import static org.hamcrest.Matchers.*;
 
 public class SingleUser {
@@ -35,6 +39,23 @@ public class SingleUser {
                 .get(baseUrl + "/api/users/2")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
+                .body(containsString("data"))
+                .body(containsString("support"))
+                .body("data.id", equalTo(2))
+                .body("data.email", equalTo("janet.weaver@reqres.in"))
+                .body("data.first_name", equalTo("Janet"))
+                .body("data.last_name", equalTo("Weaver"))
+                .body("data.avatar", equalTo("https://reqres.in/img/faces/2-image.jpg"));
+    }
+
+    @Test
+    public void singleUser2() {
+        Response response = sendGetRequest(
+                reqSpecification,
+                "/api/users/2",
+                HttpStatus.SC_OK);
+        response
+                .then()
                 .body(containsString("data"))
                 .body(containsString("support"))
                 .body("data.id", equalTo(2))

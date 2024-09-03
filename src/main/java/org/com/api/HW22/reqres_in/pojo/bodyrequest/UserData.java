@@ -1,4 +1,4 @@
-package org.com.api.HW22.reqres_in.pojo;
+package org.com.api.HW22.reqres_in.pojo.bodyrequest;
 
 public class UserData {
 
@@ -9,6 +9,11 @@ public class UserData {
         this.email = email;
         this.password = password;
     }
+
+    public UserData(String email) {
+        this.email = email;
+    }
+
 
     public String getEmail() {
         return email;
